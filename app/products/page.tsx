@@ -1,4 +1,4 @@
-import ProductList from "@/components/product-list";
+import { ProductList } from "@/components/product-list";
 import { stripe } from "@/lib/stripe";
 
 export default async function Products() {
@@ -7,7 +7,7 @@ export default async function Products() {
   });
 
   return (
-    <div>
+    <div className="">
       <h1>All Products</h1>
       <ProductList products={products.data} />
     </div>

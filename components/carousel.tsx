@@ -15,7 +15,7 @@ export const Carousel = ({ products }: Props) => {
   useEffect(() => {
     const interval = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % products.length);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [products.length]);
 
@@ -24,14 +24,14 @@ export const Carousel = ({ products }: Props) => {
   const price = currentProduct.default_price as Stripe.Price;
 
   return (
-    <Card className="relative overflow-hidden rounded-lg shadow-md border-gray-300">
+    <Card className="relative overflow-hidden rounded-lg shadow-md border-gray-300 p-6">
       {currentProduct.images && currentProduct.images[0] && (
-        <div className=" relative h-80 w-full">
+        <div className="relative h-100  ">
           <Image
             src={currentProduct.images[0]}
-            layout="fill"
-            objectFit="cover"
-            className="transition-opacity duration-500 ease-in-out"
+            fill
+            objectFit="contain"
+            className="transition-opacity duration-500 ease-in-out "
             alt={currentProduct.name}
           />
         </div>
