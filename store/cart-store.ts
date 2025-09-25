@@ -10,27 +10,46 @@ export interface CartItem {
 }
 
 interface CartStore {
-  cart: CartItem[];
+  items: CartItem[];
   addItem: (item: CartItem) => void;
+  removeItem: (id: string) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartStore>()(
-  persist((set, get) => ({
-    cart: [],
+  persist(
+    (set, get) => ({
+      items: [],
 
-    addItem: (item: CartItem) =>
-      set((state: CartStore) => {
-        const existing = state.cart.find((i) => i.id === item.id);
-        if (existing) {
+      addItem: (item: CartItem) =>
+        set((state: CartStore) => {
+          const existing = state.items.find((i) => i.id === item.id);
+          if (existing) {
+            return {
+              items: state.items.map((i) =>
+                i.id === item.id
+                  ? { ...i, quantity: i.quantity + item.quantity }
+                  : i
+              ),
+            };
+          }
+          return { items: [...state.items, item] };
+        }),
+      removeItem: (id: string) =>
+        set((state) => {
           return {
-            cart: state.cart.map((i) =>
-              i.id === item.id
-                ? { ...i, quantity: i.quantity + item.quantity }
-                : i
-            ),
+            items: state.items
+              .map((item) =>
+                item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+              )
+              .filter((item) => item.quantity > 0),
           };
-        }
-        return { cart: [...state.cart, item] };
-      }),
-  }))
+        }),
+      clearCart: () =>
+        set(() => {
+          return { items: [] };
+        }),
+    }),
+    { name: "cart" }
+  )
 );
