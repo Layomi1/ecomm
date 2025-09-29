@@ -30,7 +30,7 @@ export const Carousel = ({ products }: Props) => {
           <Image
             src={currentProduct.images[0]}
             fill
-            objectFit="contain"
+            objectFit="cover"
             className="transition-opacity duration-500 ease-in-out "
             alt={currentProduct.name}
           />

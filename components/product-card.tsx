@@ -11,16 +11,10 @@ interface Props {
 
 export const ProductCard = ({ product }: Props) => {
   const price = product.default_price as Stripe.Price;
-  // const navigate = useNavigate();
-
-  const handleViewDetails = () => {
-    console.log("gong");
-    // navigate;
-  };
 
   return (
     <Link href={`/products/${product.id}`} className="block h-full">
-      <Card className="group hover:shadow-2xl transition duration-300 py-2 h-full flex flex-col border-gray-300 gap-0">
+      <Card className="group hover:shadow-2xl transition duration-300 pt-0 h-full flex flex-col border-gray-300 gap-0">
         {product.images && product.images[0] && (
           <div className="relative h-100 w-100 ">
             <Image
@@ -46,12 +40,7 @@ export const ProductCard = ({ product }: Props) => {
               </p>
             )}
           </CardContent>
-          <Button
-            className="mt-4 bg-black text-white"
-            onClick={handleViewDetails}
-          >
-            View Details
-          </Button>
+          <Button className="mt-4 bg-black text-white">View Details</Button>
         </CardHeader>
       </Card>
     </Link>

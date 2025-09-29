@@ -31,7 +31,7 @@ export const ProductList = ({ products }: Props) => {
           className="w-full max-w-md rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
-      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredProducts.map((product) => (
           <li key={product.id}>
             <ProductCard product={product} />
